@@ -1,4 +1,20 @@
-import { Component, OnInit, Input, OnChanges, SimpleChange, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChange,
+  DoCheck,
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  ContentChild,
+
+} from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -6,43 +22,49 @@ import { Component, OnInit, Input, OnChanges, SimpleChange, DoCheck, AfterConten
   styleUrls: ['./server-element.component.css']
 })
 export class ServerElementComponent implements OnInit {
-  @Input('srvElement') element: {type: string, name: string, content: string};
+  @Input('srvElement') element: { type: string, name: string, content: string };
   @Input() name: string;
-  constructor() { 
+  @ViewChild('heading', { static: true }) header: ElementRef;
+  @ContentChild('contentParagraph', {static: true}) paragraph: ElementRef;
+
+  constructor() {
     console.log('Constructor Caled');
-    
+
   }
-  ngOnChanges(changes: SimpleChange){
+  ngOnChanges(changes: SimpleChange) {
     console.log('OnChange Caled');
     console.log(changes);
-    
+
   }
 
   ngOnInit() {
     console.log('ngOnInit Caled');
+    console.log('text Content' + this.header.nativeElement.textContent);
+    console.log('Text content of Paragraph: ' + this.paragraph.nativeElement.textContent);
+    
   }
-  ngDoCheck(){
+  ngDoCheck() {
     console.log("ngDoCheck caled");
-    
+
   }
-  ngAfterContentInit(){
+  ngAfterContentInit() {
     console.log("ngAfterContentInit colled");
-    
+    console.log('Text content of Paragraph: ' + this.paragraph.nativeElement.textContent);
   }
-  ngAfterContentChecked(){
+  ngAfterContentChecked() {
     console.log("AfterContentChecked called");
-    
+
   }
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     console.log("AfterViewInit caled");
-    
+
   }
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     console.log("AfterViewChecked caled");
-    
+    console.log('text Content' + this.header.nativeElement.textContent);
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     console.log('OnDestroy was called');
-    
+
   }
 }
